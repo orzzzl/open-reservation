@@ -1,0 +1,17 @@
+{% extends "front_base.html" %}
+
+{% block title %} Resource Page {% endblock %}
+
+{% block container_content %}
+    {{ super() }}
+            <h5>{{ r.name }}&nbsp;--owned by {{ r.belonging_user }}</h5>
+            <p style="color:blue"> Tag: </p>
+                {% for t in r.tags() %}
+                    <a style="color:red;" href="/tag/{{t.key()}}">{{t.name}}</a> &nbsp;
+                {% endfor %}
+            </br>
+            <a href="/res/{{r.key()}}"> view </a> &nbsp; <a href="/rss"> rss </a>
+            {% if username == r.belonging_user %} &nbsp; <a> edit </a> {% endif %}
+            <br><br>
+
+{% endblock %}

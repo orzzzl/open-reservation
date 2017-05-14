@@ -1,0 +1,12 @@
+{% extends "front_base.html" %}
+
+{% block title %} Tag Page {% endblock %}
+
+
+{% block container_content %}
+    <h3>Resource with the Tag:  {{ tagname }}</h3>
+    {{ super() }}
+    {% for r in res %}
+        {{ r.render() | safe }}
+    {% endfor %}
+{% endblock %}

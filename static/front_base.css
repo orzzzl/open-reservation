@@ -1,0 +1,34 @@
+.container {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.login-area {
+    position: relative;
+    font-size: 13px;
+    color: gray;
+    top: 20px;
+    right: 20px;
+}
+
+
+@media (max-width: 1200px) {
+    .container_content {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+body {
+  min-height: 2000px;
+  padding-top: 70px;
+}
+
+.mybar {
+       background: white;
+       opacity: 1;
+}
+
+.prewords {
+    color: brown;
+}

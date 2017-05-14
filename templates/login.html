@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %} Sign in {% endblock %}
+
+{% block head %}
+    {{ super() }}
+    <link href="../static/signin_and_signup.css" rel="stylesheet">
+{% endblock %}
+
+{% block body_content %}
+    <div class="container">
+       <div id="logbox">
+          <form id="signup" method="post">
+            <h1>account login</h1>
+            <input name="username" type="text" placeholder="enter your username" class="input pass"/>
+            <input name="password" type="password" placeholder="enter your password" required="required" class="input pass"/>
+            <input type="submit" value="Sign me in!" class="inputButton"/>
+            <div class="error text-center">
+                {{error}}
+            </div>
+            <div class="text-center">
+                <a href="/signup" id="">create an account</a>
+            </div>
+          </form>
+        </div>
+    </div>
+{% endblock %}

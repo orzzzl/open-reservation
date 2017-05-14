@@ -1,0 +1,12 @@
+{% extends "front_base.html" %}
+
+{% block title %} Front Page {% endblock %}
+
+{% block container_content %}
+    {{ super() }}
+    <h3> All Resource: </h3>
+    <hr>
+        {% for r in res %}
+            {{ r.render()| safe }}
+        {% endfor %}
+{% endblock %}
