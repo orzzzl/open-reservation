@@ -10,7 +10,7 @@ If you want to run it locally, clone this project and run:
 
 ```dev_appserver.py .```(You need to have google app engine installed with the bin path added to the PATH environment)
 
-There is another branch called "experiment" and it basically remove the rss function.
+There is another branch called "experiment" and it basically remove the rss functionality.
 
 
 ## Web functionalities
