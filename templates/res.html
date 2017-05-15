@@ -22,7 +22,6 @@
         {% else %}
             <a href="/res/{{r.key()}}"> view and make reservation</a> &nbsp;
         {% endif %}
-        <a href="/rss/{{ r.key() }}"> rss </a>
         {% if username == r.belonging_user %} &nbsp; <a href="/edit/{{r.key()}}"> edit </a> {% endif %}
     {% endif %}
     <br><br>
