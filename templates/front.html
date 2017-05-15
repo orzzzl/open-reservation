@@ -4,9 +4,32 @@
 
 {% block container_content %}
     {{ super() }}
-    <h3> All Resource: </h3>
-    <hr>
-        {% for r in res %}
-            {{ r.render()| safe }}
-        {% endfor %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-4 col-md-4">
+                <h3> All Resource: </h3>
+                <hr>
+                    {% for r in res %}
+                        {{ r.render(username) | safe }}
+                    {% endfor %}
+            </div>
+            {% if username %}
+                <div class="col-lg-4 col-4 col-md-4">
+                    <h3> UPCOMING Reservation {{ username }} makes: </h3>
+                    <hr>
+                    {% for rs in resv %}
+                        {{ rs.get_start_time() }} -- {{ rs.get_end_time() }}---->&nbsp;{{ rs.get_name() }}
+                        <a href="/del/{{ rs.key() }}"> delete </a><br>
+                    {% endfor %}
+                </div>
+                <div class="col-lg-4 col-4 col-md-4">
+                    <h3> Resource user {{ username }} owns: </h3>
+                    <hr>
+                    {% for r in res2 %}
+                        {{ r.render(username) | safe }}
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}

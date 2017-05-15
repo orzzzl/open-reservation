@@ -7,6 +7,6 @@
     <h3>Resource with the Tag:  {{ tagname }}</h3>
     {{ super() }}
     {% for r in res %}
-        {{ r.render() | safe }}
+        {{ r.render(username) | safe }}
     {% endfor %}
 {% endblock %}

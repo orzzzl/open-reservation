@@ -15,21 +15,27 @@ class Resource(db.Model):
     start_time_n = db.IntegerProperty(required=True)
     end_time_n = db.IntegerProperty(required=True)
     last_time = db.DateTimeProperty()
+    tag = db.StringProperty(required=True)
     belonging_user = db.StringProperty(required=True)
     name = db.StringProperty(required=True)
 
     @classmethod
-    def create_res(self, res_name, start_time, end_time, start_time_n, end_time_n, bu):
+    def create_res(self, res_name, start_time, end_time, start_time_n, end_time_n, bu, tag):
         return Resource(
                             parent=res_key(), start_time=start_time, end_time=end_time,
                             start_time_n=start_time_n, end_time_n=end_time_n,
                             belonging_user=bu,
-                            name=res_name, reserved=False
+                            name=res_name, tag=tag
                         )
 
     @classmethod
     def get_all(cls):
         res = db.GqlQuery("select * from Resource")
+        return res
+
+    @classmethod
+    def by_user(cls, u):
+        res = db.GqlQuery("select * from Resource where belonging_user = :u", u = u)
         return res
 
     @classmethod
@@ -45,8 +51,13 @@ class Resource(db.Model):
         return tgs
 
 
-    def render(self):
-        return render_template('res.html', r=self)
+    def render(self, username, detail=False, reserve=False, resv=None):
+        return render_template(
+                                   'res.html', r=self, username=username, detail=detail, reserve=reserve,
+                                   start_time=str(self.start_time)[-8:-3],
+                                   end_time=str(self.end_time)[-8:-3],
+                                   resv=resv
+                            )
 
 
 

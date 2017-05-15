@@ -33,3 +33,12 @@ class Tag(db.Model):
     def by_name(cls, n):
         ans = db.GqlQuery("select * from Tag where name = :n", n = n)
         return ans
+
+    @classmethod
+    def delete_by_key(cls, k):
+        instance = Tag.by_rid(k)
+        if instance is not None:
+            for i in instance:
+                i.delete()
+        else:
+            print "it is None"

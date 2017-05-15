@@ -1,16 +1,20 @@
 {% extends "front_base.html" %}
 
-{% block title %} Front Page {% endblock %}
+{% block title %} Add Resource {% endblock %}
 
 {% block container_content %}
     {{ super() }}
     <div class="container">
         <h1>create a resource</h1>
-        <form method="post" action="/add_resource">
-            <label> name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="string" name="name" required="required"><br>
-            <label> tag(separated by ;): </label><input type="string" name="tag" required="required"><br>
-            <label> start_time:&nbsp;&nbsp;&nbsp;</label><input type="time" name="start_time" required="required"> </br>
-            <label> end_time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="time" name="end_time" required="required"> </br>
+        {% if edit %}
+            <form method="post" action="/edit/{{ id }}">
+        {% else %}
+            <form method="post" action="/add_resource">
+        {% endif %}
+            <label> name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="string" name="name" required="required" value="{{ name }}"><br>
+            <label> tag(separated by ;): </label><input type="string" name="tag" required="required" value="{{ tag }}"><br>
+            <label> start_time:&nbsp;&nbsp;&nbsp;</label><input type="time" name="start_time" required="required" value="{{ start_time }}"> </br>
+            <label> end_time:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label><input type="time" name="end_time" required="required" value="{{ end_time }}"> </br>
             <input type="submit" value="Send">
         </form>
     </div>

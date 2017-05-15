@@ -1,17 +1,28 @@
-{% extends "front_base.html" %}
-
-{% block title %} Resource Page {% endblock %}
-
-{% block container_content %}
-    {{ super() }}
-            <h5>{{ r.name }}&nbsp;--owned by {{ r.belonging_user }}</h5>
-            <p style="color:blue"> Tag: </p>
-                {% for t in r.tags() %}
-                    <a style="color:red;" href="/tag/{{t.key()}}">{{t.name}}</a> &nbsp;
-                {% endfor %}
-            </br>
-            <a href="/res/{{r.key()}}"> view </a> &nbsp; <a href="/rss"> rss </a>
-            {% if username == r.belonging_user %} &nbsp; <a> edit </a> {% endif %}
-            <br><br>
-
-{% endblock %}
+ <h5>{{ r.name }}&nbsp;--owned by {{ r.belonging_user }}</h5>
+    {% if detail %}
+        <label>Avail start time:&nbsp;</label> {{ start_time }}</br>
+        <label>Avail end time:&nbsp;</label> {{ end_time }}</br>
+        <p style="color:green">upcoming reservation:</p>
+        {% if resv != None %}
+            {% for re in resv %}
+                {{ re.get_start_time() }} -- {{ re.get_end_time() }} &nbsp;&nbsp; By {{ re.belonging_user }} <br>
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+    <label style="color:blue"> Tag: </label>
+    {% for t in r.tags() %}
+        <a style="color:red;" href="/tag/{{t.key()}}">{{t.name}}</a> &nbsp;
+    {% endfor %}
+    </br>
+    {% if reserve == False %}
+        {% if detail %}
+            {% if username %}
+                <a href="/make_reservation/{{ r.key() }}" style="color:purple"> Make a reservation now!! </a>
+            {% endif %}
+        {% else %}
+            <a href="/res/{{r.key()}}"> view and make reservation</a> &nbsp;
+        {% endif %}
+        <a href="/rss/{{ r.key() }}"> rss </a>
+        {% if username == r.belonging_user %} &nbsp; <a href="/edit/{{r.key()}}"> edit </a> {% endif %}
+    {% endif %}
+    <br><br>

@@ -1,0 +1,7 @@
+{% extends "front_base.html" %}
+
+{% block title %} Resource Page {% endblock %}
+{% block container_content %}
+    {{ super() }}
+    {{ r.render(username, detail=True, resv=resv) | safe }}
+{% endblock %}
