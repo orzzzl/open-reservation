@@ -1,83 +1,36 @@
-## Python Flask Skeleton for Google App Engine
+## A website for open reservation
 
-![status: inactive](https://img.shields.io/badge/status-inactive-red.svg)
+These website is been built using GAE along with Flask.
+
+You can find the website live at this url:
+
+```https://open-sreservation-ost.appspot.com/```
+
+If you want to run it locally, clone this project and run:
+
+```dev_appserver.py .```(You need to have google app engine installed with the bin path added to the PATH environment)
 
 
-A skeleton for building Python applications on Google App Engine with the
-[Flask micro framework](http://flask.pocoo.org).
+## Web functionalities
+Pretty much everything covered in the rubic file of the final project. Namely the following points:
 
-See our other [Google Cloud Platform github
-repos](https://github.com/GoogleCloudPlatform) for sample applications and
-scaffolding for other python frameworks and use cases.
+1. Multi-user system. User can login, logout, register a new user. All infomation will be stored in cookies during one session. What I extrally did is taht Password has been encoded by encryption algorithm and only store the encoded version. So user's data can keep safe even if the entire data base is stolen.
 
-## Run Locally
-1. Install the [App Engine Python SDK](https://developers.google.com/appengine/downloads).
-See the README file for directions. You'll need python 2.7 and [pip 1.4 or later](http://www.pip-installer.org/en/latest/installing.html) installed too.
+2. Create a resource and set an available start and end time. End time has to been later than the start time otherwise leed to an error.
 
-2. Clone this repo with
+3. User can either make or delete a reservation. Reservation can't span two days and can't conflit with all the previously made reservation. Only upcoming reservation by some certain user will be shown on the front paeg.
 
-   ```
-   git clone https://github.com/GoogleCloudPlatform/appengine-python-flask-skeleton.git
-   ```
-3. Install dependencies in the project's lib directory.
-   Note: App Engine can only import libraries from inside your project directory.
+4. Tag system. Click the tag of a resource too see a list of all resource with this tag.
 
-   ```
-   cd appengine-python-flask-skeleton
-   pip install -r requirements.txt -t lib
-   ```
-4. Run this project locally from the command line:
 
-   ```
-   dev_appserver.py .
-   ```
+## Code structure
 
-Visit the application [http://localhost:8080](http://localhost:8080)
+Pretty much follow the MVC pattern.
 
-See [the development server documentation](https://developers.google.com/appengine/docs/python/tools/devserver)
-for options when running dev_appserver.
+M: You can find every data model in the database directory. I have 3 tables namely reservation, resource, tag.
 
-## Deploy
-To deploy the application:
+V: It is separated to html files which is in the template folder and css and js files which can be found in the static folder.
 
-1. Use the [Admin Console](https://appengine.google.com) to create a
-   project/app id. (App id and project id are identical)
-1. [Deploy the
-   application](https://developers.google.com/appengine/docs/python/tools/uploadinganapp) with
+C: Controller stuff. It's all in main.py in the root directory.
 
-   ```
-   appcfg.py -A <your-project-id> --oauth2 update .
-   ```
-1. Congratulations!  Your application is now live at your-app-id.appspot.com
-
-## Next Steps
-This skeleton includes `TODO` markers to help you find basic areas you will want
-to customize.
-
-### Relational Databases and Datastore
-To add persistence to your models, use
-[NDB](https://developers.google.com/appengine/docs/python/ndb/) for
-scale.  Consider
-[CloudSQL](https://developers.google.com/appengine/docs/python/cloud-sql)
-if you need a relational database.
-
-### Installing Libraries
-See the [Third party
-libraries](https://developers.google.com/appengine/docs/python/tools/libraries27)
-page for libraries that are already included in the SDK.  To include SDK
-libraries, add them in your app.yaml file. Other than libraries included in
-the SDK, only pure python libraries may be added to an App Engine project.
-
-### Feedback
-Star this repo if you found it useful. Use the github issue tracker to give
-feedback on this repo.
-
-## Contributing changes
-See [CONTRIB.md](CONTRIB.md)
-
-## Licensing
-See [LICENSE](LICENSE)
-
-## Author
-Logan Henriquez and Johan Euphrosine
-# open-reservation
+Tools folder include some utility functions I wrote for this project.
